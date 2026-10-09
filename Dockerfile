@@ -1,5 +1,5 @@
 
-FROM codercom/code-server:latest
+FROM codercom/code-server:4.141.0
 
 USER root
 
@@ -15,5 +15,4 @@ WORKDIR /home/coder/workspace
 
 EXPOSE 8000
 
-ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["printf 'bind-addr: 0.0.0.0:%s\\nauth: password\\npassword: GOATS\\ncert: false\\n' \"${PORT:-8000}\" > /home/coder/.config/code-server/config.yaml && exec /usr/bin/code-server --config /home/coder/.config/code-server/config.yaml --disable-telemetry /home/coder/workspace"]
+CMD ["sh", "-c", "printf 'bind-addr: 0.0.0.0:%s\\nauth: password\\npassword: GOATS\\ncert: false\\n' \"${PORT:-8000}\" > /home/coder/.config/code-server/config.yaml && exec code-server --config /home/coder/.config/code-server/config.yaml --disable-telemetry /home/coder/workspace"]
