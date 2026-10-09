@@ -4,8 +4,9 @@ set -e
 
 PORT="${PORT:-8000}"
 
-exec code-server \
-    --bind-addr "0.0.0.0:${PORT}" \
-    --auth none \
-    --disable-telemetry \
-    /home/coder/workspace
+exec /usr/bin/code-server \
+  --bind-addr "0.0.0.0:${PORT}" \
+  --auth none \
+  --disable-telemetry \
+  --disable-update-check \
+  /home/coder/workspace
