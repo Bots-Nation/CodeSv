@@ -3,19 +3,23 @@
 set -e
 
 PORT="${PORT:-8000}"
-PASSWORD="GOATS"
+CONFIG="/home/coder/.config/code-server/config.yaml"
 
-mkdir -p /home/coder/.config/code-server
+mkdir -p "$(dirname "$CONFIG")"
+mkdir -p /home/coder/workspace
 
-cat > /home/coder/.config/code-server/config.yaml <<EOF
+cat > "$CONFIG" <<EOF
 bind-addr: 0.0.0.0:${PORT}
 auth: password
-password: "${PASSWORD}"
+password: GOATS
 cert: false
 EOF
 
+echo "=== Active Code Server Config ==="
+cat "$CONFIG"
+
 exec code-server \
-  --config /home/coder/.config/code-server/config.yaml \
+  --config "$CONFIG" \
   --disable-telemetry \
   --disable-update-check \
   /home/coder/workspace
